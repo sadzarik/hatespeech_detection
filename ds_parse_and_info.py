@@ -3,7 +3,7 @@ import pandas as pd
 rows = []
 bad_lines = []  # тут зберігатимемо номери й вміст тих рядків, які не вдалося правильно розпарсити
 
-with open("annotation_dataset.csv", encoding="utf-8-sig") as f:
+with open("datasets/datasets_for_scrapping/annotation_dataset.csv", encoding="utf-8-sig") as f:
     header = f.readline()  # читаємо заголовок (очікуємо: clean_text,label)
     for lineno, line in enumerate(f, start=2):  # нумерація починається з 2, бо перший рядок — заголовок
         line = line.rstrip("\n")

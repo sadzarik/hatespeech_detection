@@ -1,14 +1,14 @@
 import pandas as pd
 import re
 
-df_ukr = pd.read_csv("ukr_tweets.csv", encoding='utf-8-sig', low_memory=False)
+df_ukr = pd.read_csv("datasets/datasets_for_scrapping/ukr_tweets.csv", encoding='utf-8-sig', low_memory=False)
 
 # === 1. Завантаження словника агресії ===
 def load_aggressive_keywords(filepath):
     with open(filepath, 'r', encoding='utf-8') as f:
         return [line.strip().lower() for line in f if line.strip()]
 
-aggressive_keywords = load_aggressive_keywords('aggressive_words.txt')
+aggressive_keywords = load_aggressive_keywords('datasets/datasets_for_scrapping/aggressive_words.txt')
 
 # === 2. Фільтрація, очищення ===
 def is_valid_text(text):

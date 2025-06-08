@@ -8,18 +8,26 @@ from tqdm import tqdm
 from sklearn.metrics import classification_report
 import numpy as np
 from sklearn.utils.class_weight import compute_class_weight
-
+from preprocessing import clean_text, lemmatize_text
 
 # === КОНФІГУРАЦІЯ ===
 MODEL_NAME = "bert-base-multilingual-cased"
 NUM_LABELS = 6
-BATCH_SIZE = 16
+BATCH_SIZE = 32
 EPOCHS = 10
-MAX_LEN = 512
+MAX_LEN = 256
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # === КРОК 1. ЗАВАНТАЖЕННЯ ДАНИХ ===
-df = pd.read_csv("annotation_dataset_with_aggression.csv", encoding="utf-8-sig")
+df = pd.read_csv("datasets/merged_dataset.csv", encoding="utf-8-sig", sep=';')
+
+# Чистимо та лематизуємо текст
+df["clean_text"] = df["text"].apply(clean_text).apply(lemmatize_text)
+
+# Перетворюємо label в integer
+df["label"] = df["label"].astype(int)
+
+# Train/test split
 train_df, val_df = train_test_split(df, test_size=0.2, random_state=42, stratify=df["label"])
 
 # === КРОК 2. ДАТАСЕТ ===
@@ -76,7 +84,6 @@ class_weights = compute_class_weight(
 )
 class_weights = torch.tensor(class_weights, dtype=torch.float).to(DEVICE)
 loss_fn = torch.nn.CrossEntropyLoss(weight=class_weights)
-
 
 # === КРОК 5. НАВЧАННЯ ===
 for epoch in range(EPOCHS):
