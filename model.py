@@ -31,7 +31,7 @@ def predict(text: str):
         return_tensors="pt",
         padding=True,
         truncation=True,
-        max_length=256  # Встановлюємо так само, як у тренуванні
+        max_length=256
     )
     inputs = {k: v.to(DEVICE) for k, v in inputs.items()}
 

@@ -5,7 +5,7 @@ try:
     nlp = spacy.load("uk_core_news_sm")
 except OSError:
     nlp = None
-    print("⚠️ Українську модель spaCy не знайдено. Для лематизації встановіть її через 'python -m spacy download uk_core_news_sm'.")
+    print("Українську модель spaCy не знайдено. Для лематизації встановіть її через 'python -m spacy download uk_core_news_sm'.")
 
 def clean_text(text: str) -> str:
     """

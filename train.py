@@ -19,7 +19,7 @@ MAX_LEN = 256
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # === КРОК 1. ЗАВАНТАЖЕННЯ ДАНИХ ===
-df = pd.read_csv("datasets/merged_dataset.csv", encoding="utf-8-sig", sep=';')
+df = pd.read_csv("merged_dataset.csv", encoding="utf-8-sig", sep=';')
 
 # Чистимо та лематизуємо текст
 df["clean_text"] = df["text"].apply(clean_text).apply(lemmatize_text)
@@ -60,7 +60,7 @@ class AggressionDataset(Dataset):
         }
 
 # === КРОК 3. ТОКЕНІЗАТОР ===
-tokenizer = BertTokenizer.from_pretrained(MODEL_NAME)
+tokenizer = BertTokenizer.from_pretrained(MODEL_NAME, timeout=60)
 
 train_dataset = AggressionDataset(train_df["clean_text"], train_df["label"], tokenizer, MAX_LEN)
 val_dataset = AggressionDataset(val_df["clean_text"], val_df["label"], tokenizer, MAX_LEN)
