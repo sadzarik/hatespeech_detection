@@ -1,6 +1,7 @@
 datasets/
 saved_model/
 __pycache__/
+logs/
 ds_augmentation.py
 ds_class0_scrapper.py
 ds_combine_mix_script.py
