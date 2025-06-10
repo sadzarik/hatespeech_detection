@@ -8,7 +8,7 @@ ds_combine_mix_script.py
 ds_inspect.py
 ds_parse_and_info.py
 ds_scraper.py
-quotes_labels_add_scraipt.py
+quote_labels_add_script.py
 parser_hate_speech.py
 parquet_to_csv.py
 class_parser.py
