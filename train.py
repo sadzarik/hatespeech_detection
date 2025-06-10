@@ -14,7 +14,7 @@ from preprocessing import clean_text, lemmatize_text
 MODEL_NAME = "bert-base-multilingual-cased"
 NUM_LABELS = 6
 BATCH_SIZE = 32
-EPOCHS = 10
+EPOCHS = 13
 MAX_LEN = 256
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
